@@ -9,7 +9,7 @@
             text-align: center;
             padding-top: 50px;
             margin: 0;
-            overflow: hidden; /* 避免圖片溢出 */
+            overflow: hidden; /* Avoid image overflow */
         }
 
         .image-container {
@@ -77,7 +77,6 @@
             right: 20px;
         }
 
-
         .retry-button:hover {
             background-color: black;
         }
@@ -86,15 +85,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* 讓結果容器高度佔滿整個畫面 */
+            height: 100vh; /* Let result container fill the whole screen */
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* 這個不一定要 */
+            background-color: rgba(0, 0, 0, 0.7); /* Optional background */
         }
 
         .result-image {
-            width: 100%; /* 讓圖片寬度為100% */
-            height: 100%; /* 讓圖片高度為100% */
-            object-fit: cover; /* 使圖片保持比例且填滿整個畫面 */
+            width: 100%; /* Let image width be 100% */
+            height: 100%; /* Let image height be 100% */
+            object-fit: cover; /* Keep image proportion */
         }
     </style>
 </head>
@@ -116,10 +115,10 @@
 
         const questions = [
             {
-                question_id: "insert", // 特殊插圖頁面
+                question_id: "insert",
                 question: "",
                 options: ["開始測驗"],
-                image: "images/firstpage.JPG" // 替換為你的插圖路徑
+                image: "images/firstpage.JPG"
             },
             {
                 question_id: 0,
@@ -200,7 +199,7 @@
                 image: "images/Q12.png"
             }
         ];
-        
+
         let currentQuestionIndex = 0;
         let answers = [];
 
@@ -208,7 +207,6 @@
             const questionData = questions[currentQuestionIndex];
             const questionContainer = document.getElementById("question-container");
 
-            // 特別處理 "insert" 的 question_id
             if (questionData.question_id === "insert") {
                 questionContainer.innerHTML = `
                     <div class="image-container">
@@ -263,45 +261,109 @@
             }
         }
 
-        //https://bytemeweb.000.pe/receive_data.php
-        function submitAnswers(answers) {
-            console.log('Submitting answers:', answers);
-
-            // API URL，這裡替換成你的 Heroku 應用網址
-            const apiUrl = 'https://morning-ocean-13769-62f7507f1824.herokuapp.com/receive_data.php';
-
-            fetch(apiUrl, {
-                method: 'POST',
-                mode: 'cors',  // 添加這一行
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(answers),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        function submitAnswers() {
+            const result = calculateResult(answers);
+            showResult(result);
         }
 
+        function calculateResult(answers) {
+            const animals = {
+                "蛇": 0, "兔子": 0, "烏鴉": 0, "貓": 0,
+                "羊": 0, "獅子": 0, "馬": 0, "狗": 0
+            };
 
+            const categories = {
+                "內向外向": {
+                    questions: [1, 5, 8],
+                    score_map: {
+                        3: {"蛇": 3, "兔子": 2, "烏鴉": 1},
+                        4: {"兔子": 3, "烏鴉": 2, "貓": 1, "蛇": 2},
+                        5: {"烏鴉": 3, "貓": 2, "羊": 1, "兔子": 2, "蛇": 1},
+                        6: {"貓": 3, "羊": 2, "獅子": 1, "烏鴉": 2, "兔子": 1},
+                        7: {"羊": 3, "獅子": 2, "馬": 1, "狗": 1, "貓": 2, "烏鴉": 1},
+                        8: {"獅子": 3, "馬": 2, "狗": 2, "羊": 2, "貓": 1},
+                        9: {"馬": 3, "狗": 3, "獅子": 2, "羊": 1}
+                    }
+                },
+                "計畫型隨緣型": {
+                    questions: [2, 6, 10],
+                    score_map: {
+                        3: {"馬": 3, "羊": 3, "貓": 2, "狗": 1},
+                        4: {"貓": 3, "馬": 2, "羊": 2, "狗": 2, "烏鴉": 1},
+                        5: {"狗": 3, "貓": 2, "馬": 1, "羊": 1, "烏鴉": 2, "蛇": 1},
+                        6: {"烏鴉": 3, "狗": 2, "貓": 1, "蛇": 2, "兔子": 1},
+                        7: {"蛇": 3, "烏鴉": 2, "狗": 1, "兔子": 2, "獅子": 1},
+                        8: {"兔子": 3, "蛇": 2, "烏鴉": 1, "獅子": 2},
+                        9: {"獅子": 3, "兔子": 2, "蛇": 1}
+                    }
+                },
+                "理性感性": {
+                    questions: [4, 7, 11],
+                    score_map: {
+                        3: {"馬": 3, "羊": 2, "狗": 1},
+                        4: {"羊": 3, "馬": 2, "狗": 2, "兔子": 1, "貓": 1},
+                        5: {"狗": 3, "羊": 2, "馬": 1, "兔子": 2, "貓": 2, "烏鴉": 1},
+                        6: {"兔子": 3, "貓": 3, "狗": 2, "羊": 1, "烏鴉": 2, "獅子": 1},
+                        7: {"烏鴉": 3, "兔子": 2, "貓": 2, "狗": 1, "獅子": 2, "蛇": 1},
+                        8: {"獅子": 3, "烏鴉": 2, "兔子": 1, "貓": 1, "蛇": 2},
+                        9: {"蛇": 3, "獅子": 2, "烏鴉": 1}
+                    }
+                },
+                "獨立或需要陪伴": {
+                    questions: [3, 9, 12],
+                    score_map: {
+                        3: {"蛇": 3, "貓": 3, "烏鴉": 2, "兔子": 1},
+                        4: {"烏鴉": 3, "蛇": 2, "貓": 2, "兔子": 2, "獅子": 1},
+                        5: {"兔子": 3, "烏鴉": 2, "蛇": 1, "貓": 1, "獅子": 2, "馬": 1},
+                        6: {"獅子": 3, "兔子": 2, "烏鴉": 1, "馬": 2, "狗": 1},
+                        7: {"馬": 3, "獅子": 2, "兔子": 1, "狗": 2, "羊": 1},
+                        8: {"狗": 3, "馬": 2, "獅子": 1, "羊": 2},
+                        9: {"羊": 3, "狗": 2, "馬": 1}
+                    }
+                }
+            };
+
+            let categoryScores = {};
+            answers.forEach(answer => {
+                const question_id = answer.question_id;
+                const choice = answer.choice;
+
+                for (let category in categories) {
+                    if (categories[category].questions.includes(question_id)) {
+                        if (!categoryScores[category]) {
+                            categoryScores[category] = 0;
+                        }
+                        categoryScores[category] += choice;
+                    }
+                }
+            });
+
+            for (let category in categories) {
+                if (categoryScores[category]) {
+                    const total_score = categoryScores[category];
+                    const score_map = categories[category].score_map[total_score];
+
+                    if (score_map) {
+                        for (let animal in score_map) {
+                            animals[animal] += score_map[animal];
+                        }
+                    }
+                }
+            }
+
+            const highestScore = Math.max(...Object.values(animals));
+            const highestAnimals = Object.keys(animals).filter(animal => animals[animal] === highestScore);
+
+            return { result: highestAnimals[0] };
+        }
 
         function showResult(result) {
             const questionContainer = document.getElementById("question-container");
-            const resultImageUrl = resultImages[result.result]; 
+            const resultImageUrl = resultImages[result.result];
 
             questionContainer.innerHTML = `
                 <div class="result-container">
                     <img src="${resultImageUrl}" alt="結果圖片" class="result-image" />
-                    <p>目前有${result.percentage}%相同結果</p>
                     <button class="retry-button" onclick="retryQuiz()">重測一次</button>
                 </div>
             `;
@@ -313,7 +375,7 @@
             loadQuestion();
         }
 
-        loadQuestion(); 
+        loadQuestion();
     </script>
 </body>
 </html>
