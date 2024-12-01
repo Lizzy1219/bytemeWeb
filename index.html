@@ -8,6 +8,8 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding-top: 50px;
+            margin: 0;
+            overflow: hidden; /* 避免圖片溢出 */
         }
 
         .image-container {
@@ -50,7 +52,7 @@
             height: 50px;
             border-radius: 25px;
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 12px;
             cursor: pointer;
             margin: 10px;
             background-color: rgba(128, 128, 128, 0.5);
@@ -66,24 +68,33 @@
         .retry-button {
             background-color: gray;
             color: white;
-            font-size: 18px;
-            padding: 15px 30px;
-            border-radius: 30px;
+            font-size: 14px; 
+            padding: 10px 20px;  
+            border-radius: 20px; 
             cursor: pointer;
-            margin-top: 20px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
         }
+
 
         .retry-button:hover {
             background-color: black;
         }
 
         .result-container {
-            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 讓結果容器高度佔滿整個畫面 */
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* 這個不一定要 */
         }
 
         .result-image {
-            width: 50%;
-            max-width: 300px;
+            width: 100%; /* 讓圖片寬度為100% */
+            height: 100%; /* 讓圖片高度為100% */
+            object-fit: cover; /* 使圖片保持比例且填滿整個畫面 */
         }
     </style>
 </head>
@@ -252,26 +263,29 @@
             }
         }
 
-        function submitAnswers() {
+        //https://bytemeweb.000.pe/receive_data.php
+        function submitAnswers(answers) {
             console.log('Submitting answers:', answers);
-            fetch('https://bytemeweb.000.pe/receive_data.php', {
+
+            // API URL，這裡替換成你的 Heroku 應用網址
+            const apiUrl = 'https://morning-ocean-13769-62f7507f1824.herokuapp.com/receive_data.php';
+
+            fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    user_id: Math.floor(Math.random() * 1000),
-                    answers: answers
-                }),
+                body: JSON.stringify(answers),
             })
             .then(response => response.json())
             .then(data => {
-                showResult(data);
+                console.log('Success:', data);
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error('Error:', error);
             });
         }
+
 
         function showResult(result) {
             const questionContainer = document.getElementById("question-container");
