@@ -105,82 +105,88 @@
 
         const questions = [
             {
+                question_id: "insert", // 特殊插圖頁面
+                question: "",
+                options: ["開始測驗"],
+                image: "images/firstpage.JPG" // 替換為你的插圖路徑
+            },
+            {
                 question_id: 0,
                 question: " ",
-                options: [" "],
-                image: "https://m.media-amazon.com/images/M/MV5BMzIyNzY4NTMtNmVhYS00OWFhLTkwMWMtOGFkNTdmNWU2ZDdiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                options: ["繼續"],
+                image: "images/Q0.png"
             },
             {
                 question_id: 1,
                 question: " ",
-                options: ["覺得害怕後退幾步等他開口", "小心翼翼地詢問這裡是哪裡", "大方跟他握手並交談"],
-                image: "https://m.media-amazon.com/images/M/MV5BMzIyNzY4NTMtNmVhYS00OWFhLTkwMWMtOGFkNTdmNWU2ZDdiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                options: ["太可怕了吧！（退後幾步等待對方先開口）", "小心翼翼詢問這裡是哪裡", "和他握手並主動交談"],
+                image: "images/Q1.png"
             },
             {
                 question_id: 2,
                 question: " ",
-                options: ["覺得很興奮立刻喝下去開始", "告訴神秘兔子需要幾分鐘做心理準備", "先停留一陣子並準備周全才會參與"],
-                image: "https://s.eslite.com/upload/product/o/2682322136001/20221230035614911889.jpg"
+                options: ["好刺激！（馬上喝下去）", "告訴兔子你需要幾分鐘做心理準備", "先計畫一陣子，準備周全再答應"],
+                image: "images/Q2.png"
             },
             {
                 question_id: 3,
                 question: " ",
                 options: ["自己一個人的實驗", "跟一個未知的搭檔組隊", "一群人的團體實驗"],
-                image: "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages@2143013701_o_20220224092654.jpg"
+                image: "images/Q3.png"
             },
             {
                 question_id: 4,
                 question: " ",
-                options: ["覺得害怕又難受，為他的處境難過", "關心他有沒有受到傷害，需不需要幫助", "觀察四周，思考他可能在做什麼實驗"],
-                image: "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages@2143013701_o_20220224092654.jpg"
+                options: ["覺得害怕和不適，感到心疼", "上前關心他是否受傷，並設法幫助他", "觀察四周，思考他是否是實驗的一部分"],
+                image: "images/Q4.png"
             },
             {
                 question_id: 5,
                 question: " ",
-                options: ["默默觀察他，等對方主動搭話", "嘗試朝他微笑，表達善意", "向他揮手並詢問他的經歷"],
-                image: "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages@2143013701_o_20220224092654.jpg"
+                options: ["默默觀察對方，等他主動開口", "朝他微笑，以表達善意", "向他揮手並詢問他都發生了些什麼"],
+                image: "images/Q5.png"
             },
             {
                 question_id: 6,
                 question: " ",
-                options: ["立刻出發並沿路觀察四周環境", "在入口附近的路線來回查看迷宮的規律", "進入迷宮前先在四周找派得上用場的東西"],
-                image: "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages@2143013701_o_20220224092654.jpg"
+                options: ["先走再說，一邊觀察迷宮的環境", "在入口附近反覆查看，試圖破解迷宮", "先在起點搜索有用的物品"],
+                image: "images/Q6.png"
             },
             {
                 question_id: 7,
                 question: " ",
                 options: ["充滿神秘力量且閃閃發光的許願石", "能短暫增強夜視力的魔法藥水", "實用的武器小刀"],
-                image: "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages@2143013701_o_20220224092654.jpg"
+                image: "images/Q7.png"
             },
             {
                 question_id: 8,
                 question: " ",
-                options: ["自己一個人默默在一旁參與", "跟原本的搭檔跟著大家", "去找很多人的小團體嘗試加入他們"],
-                image: "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages@2143013701_o_20220224092654.jpg"
+                options: ["自己一個人默默參與", "跟原本的搭檔結伴", "加入新的的團體群"],
+                image: "images/Q8.png"
             },
             {
                 question_id: 9,
                 question: " ",
                 options: ["照著自己所想如實回答", "跟一旁的人討論過後再決定選哪個", "跟隨多數人的決定選擇"],
-                image: "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages@2143013701_o_20220224092654.jpg"
+                image: "images/Q9.png"
             },
             {
                 question_id: 10,
                 question: " ",
-                options: ["暫時遠離他們，等其他人了解狀況", "跟著大家討論發生什麼事情", "觀察臉上的十字並推測倒在地板的原因"],
-                image: "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages@2143013701_o_20220224092654.jpg"
+                options: ["暫時遠離他們，等其他人了解狀況", "跟著大家討論發生什麼事情", "觀察臉上的十字，並開始進行推理"],
+                image: "images/Q10.png"
             },
             {
                 question_id: 11,
                 question: " ",
-                options: ["參加這個實驗計畫是很有趣的回憶", "還好只是一個很正常的實驗沒有危及生命", "想了解這個實驗記錄了什麼和他們的目的"],
-                image: "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages@2143013701_o_20220224092654.jpg"
+                options: ["參加這個實驗計畫是很有趣的回憶", "還好這次實驗沒有危及我的性命", "對這個實驗的目的充滿好奇"],
+                image: "images/Q11.png"
             },
             {
                 question_id: 12,
                 question: " ",
-                options: ["跟他們一一握手說分別", "分享這次實驗的心得", "問他們聯絡資訊"],
-                image: "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages@2143013701_o_20220224092654.jpg"
+                options: ["和其他參與者握手道別", "和他人討論起這次實驗的心得", "還想和其他人保持聯繫"],
+                image: "images/Q12.png"
             }
         ];
         
@@ -191,21 +197,42 @@
             const questionData = questions[currentQuestionIndex];
             const questionContainer = document.getElementById("question-container");
 
-            questionContainer.innerHTML = `
-                <div class="image-container">
-                    <img src="${questionData.image}" alt="問題圖片" />
-                    <div class="text-overlay">${questionData.question}</div>
-                    <div class="option-container">
-                        ${questionData.options.map((option, index) => {
-                            return `
-                                <button class="answer-button" onclick="answerQuestion(${questionData.question_id}, ${index + 1})">
-                                    ${option}
-                                </button>
-                            `;
-                        }).join('')}
+            // 特別處理 "insert" 的 question_id
+            if (questionData.question_id === "insert") {
+                questionContainer.innerHTML = `
+                    <div class="image-container">
+                        <img src="${questionData.image}" alt="插圖" />
+                        <div class="option-container">
+                            <button class="answer-button" onclick="nextQuestion()">開始測驗</button>
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
+            } else {
+                questionContainer.innerHTML = `
+                    <div class="image-container">
+                        <img src="${questionData.image}" alt="問題圖片" />
+                        <div class="text-overlay">${questionData.question}</div>
+                        <div class="option-container">
+                            ${questionData.options.map((option, index) => {
+                                return `
+                                    <button class="answer-button" onclick="answerQuestion(${questionData.question_id}, ${index + 1})">
+                                        ${option}
+                                    </button>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                submitAnswers();
+            }
         }
 
         function answerQuestion(questionId, choice) {
@@ -253,7 +280,7 @@
             questionContainer.innerHTML = `
                 <div class="result-container">
                     <img src="${resultImageUrl}" alt="結果圖片" class="result-image" />
-                    <p>${result.percentage}%</p>
+                    <p>目前有${result.percentage}%相同結果</p>
                     <button class="retry-button" onclick="retryQuiz()">重測一次</button>
                 </div>
             `;
