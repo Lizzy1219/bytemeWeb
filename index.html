@@ -229,7 +229,7 @@
                     </div>
                 `;
             } else {
-                questionContainer.innerHTML = `
+                let questionContent = `
                     <div class="image-container">
                         <img src="${questionData.image}" alt="問題圖片" />
                         <div class="text-overlay">${questionData.question}</div>
@@ -244,6 +244,8 @@
                         </div>
                     </div>
                 `;
+
+                questionContainer.innerHTML = questionContent;
             }
         }
 
