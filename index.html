@@ -23,6 +23,8 @@
             width: 100%;
             height: auto;
             border-radius: 5px;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
         }
 
         .text-overlay {
@@ -222,7 +224,7 @@
             if (questionData.question_id === "insert") {
                 questionContainer.innerHTML = `
                     <div class="image-container">
-                        <img src="${questionData.image}" alt="插圖" />
+                        <img src="${questionData.image}" alt="插圖" onload="fadeIn(this)" />
                         <div class="option-container">
                             <button class="answer-button" onclick="nextQuestion()">開始測驗</button>
                         </div>
@@ -231,7 +233,7 @@
             } else {
                 let questionContent = `
                     <div class="image-container">
-                        <img src="${questionData.image}" alt="問題圖片" />
+                        <img src="${questionData.image}" alt="問題圖片" onload="fadeIn(this)" />
                         <div class="text-overlay">${questionData.question}</div>
                         <div class="option-container">
                             ${questionData.options.map((option, index) => {
@@ -247,6 +249,10 @@
 
                 questionContainer.innerHTML = questionContent;
             }
+        }
+
+        function fadeIn(element) {
+            element.style.opacity = 1;
         }
 
         function nextQuestion() {
@@ -393,3 +399,4 @@
     </script>
 </body>
 </html>
+
