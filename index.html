@@ -102,6 +102,18 @@
     <div id="question-container"></div>
 
     <script>
+        const imagesToPreload = [
+            'images/snake.jpg', 'images/rabbit.jpg', 'images/crow.jpg',
+            'images/cat.jpg', 'images/sheep.jpg', 'images/lion.jpg',
+            'images/horse.jpg', 'images/dog.jpg'
+        ];
+
+        const preloadImages = imagesToPreload.map(src => {
+            const img = new Image();
+            img.src = src;
+            return img;
+        });
+
         const resultImages = {
             "蛇": "images/snake.jpg",
             "兔子": "images/rabbit.jpg",
